@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Factory Quality Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">AI Assisted Quality Analytics</p>
+          <h1>工厂质量效能可视化看板</h1>
+          <p class="subtitle">基于三花实习场景 mock 产线数据，分析良率、缺陷率、返工率、停机时间、OEE 与高风险批次。</p>
+        </div>
+        <div class="status-panel">
+          <span class="status-dot"></span>
+          <div>
+            <strong>Mock Data</strong>
+            <span>24 条产线日报记录</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="toolbar" aria-label="筛选条件">
+        <label>
+          产品
+          <select id="productFilter"></select>
+        </label>
+        <label>
+          产线
+          <select id="lineFilter"></select>
+        </label>
+        <label>
+          班次
+          <select id="shiftFilter"></select>
+        </label>
+        <button id="resetButton" type="button">重置</button>
+      </section>
+
+      <section class="kpi-grid" aria-label="核心指标">
+        <article class="kpi">
+          <span>平均产出达成率</span>
+          <strong id="kpiOutput">--</strong>
+          <small id="kpiOutputNote">--</small>
+        </article>
+        <article class="kpi">
+          <span>平均缺陷率</span>
+          <strong id="kpiDefect">--</strong>
+          <small id="kpiDefectNote">--</small>
+        </article>
+        <article class="kpi">
+          <span>平均返工率</span>
+          <strong id="kpiRework">--</strong>
+          <small id="kpiReworkNote">--</small>
+        </article>
+        <article class="kpi">
+          <span>平均 OEE</span>
+          <strong id="kpiOee">--</strong>
+          <small id="kpiOeeNote">--</small>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel panel-wide">
+          <div class="panel-heading">
+            <div>
+              <h2>产线质量效率对比</h2>
+              <p>缺陷率、OEE、停机时间综合观察</p>
+            </div>
+            <span id="recordCount" class="tag">--</span>
+          </div>
+          <div id="lineChart" class="chart" role="img" aria-label="产线质量效率对比图"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>班次对比</h2>
+              <p>日班与夜班质量波动</p>
+            </div>
+          </div>
+          <div id="shiftChart" class="chart compact" role="img" aria-label="班次对比图"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h2>产品风险分布</h2>
+              <p>按产品聚合缺陷与 OEE</p>
+            </div>
+          </div>
+          <div id="productChart" class="chart compact" role="img" aria-label="产品风险分布图"></div>
+        </article>
+
+        <article class="panel panel-wide">
+          <div class="panel-heading">
+            <div>
+              <h2>高风险记录</h2>
+              <p>按缺陷、返工、停机和设备告警评分</p>
+            </div>
+            <span id="riskCount" class="tag alert">--</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>日期</th>
+                  <th>产线</th>
+                  <th>产品</th>
+                  <th>班次</th>
+                  <th>缺陷率</th>
+                  <th>停机</th>
+                  <th>风险</th>
+                  <th>原因</th>
+                </tr>
+              </thead>
+              <tbody id="riskTable"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel insight-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>AI 复盘摘要</h2>
+              <p>由指标异常生成的可解释结论</p>
+            </div>
+          </div>
+          <div id="insightList" class="insights"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
